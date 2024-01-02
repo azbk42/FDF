@@ -48,6 +48,14 @@ typedef struct s_pixel
 
 }			t_pixel;
 
+typedef struct s_tab
+{
+	int	**tab;
+	int	y;
+	int	x;
+	int z;
+}			t_tab;
+
 typedef struct s_iso
 {
 	int		isoX;
