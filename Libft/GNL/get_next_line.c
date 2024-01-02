@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 18:14:54 by azbk              #+#    #+#             */
-/*   Updated: 2023/12/29 15:47:37 by emauduit         ###   ########.fr       */
+/*   Updated: 2023/12/31 19:33:08 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*ft_get_line(char *stash)
 		return (NULL);
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
+	str = (char *)malloc(sizeof(char) * (i + 2));  // 062066026 \n  15165165165 \n
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -74,7 +74,7 @@ static char	*ft_read_next_stash(char *stash)
 	j = 0;
 	if (!stash)
 		return (NULL);
-	while (stash[i] && stash[i] != '\n')
+	while (stash[i] && stash[i] != '\n')  
 		i++;
 	if (stash[i] == '\0')
 	{

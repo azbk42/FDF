@@ -1,28 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 18:15:01 by azbk              #+#    #+#             */
-/*   Updated: 2023/12/31 19:30:59 by emauduit         ###   ########.fr       */
+/*   Created: 2023/12/31 18:41:46 by emauduit          #+#    #+#             */
+/*   Updated: 2023/12/31 18:42:07 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "../includes/fdf.h"
 
-# include <stdlib.h>
-# include <unistd.h>
 
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 50
-# endif
+void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
+{
+	char	*dst;
 
-char	*get_next_line(int fd);
-char	*ft_strjoin_gnl(char *buffer, char *str);
-size_t	ft_len_g(char *str);
-char	*ft_strchr_g(char *s, int c);
+	dst = data->path + (y * data->size_line + x * (data->bits_pixel / 8));
+	*(unsigned int*)dst = color;
+}
 
-#endif
+
