@@ -2,7 +2,7 @@ NAME = fdf
 
 CC = cc
 CFLAGS = -Wall -Werror -Wextra -g
-MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11
+MLXFLAGS = -L ./minilibx-linux -lmlx -Ilmlx -lXext -lX11 -lm
 
 LIBFT = ./Libft/libft.a
 SRC_DIR = ./src

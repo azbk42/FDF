@@ -6,13 +6,13 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:46:41 by emauduit          #+#    #+#             */
-/*   Updated: 2023/12/31 19:39:00 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/02 18:22:05 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-static int	**free_maps(int **tab, int index)
+int	**free_maps(int **tab, int index)
 {
 	int	i;
 
@@ -28,21 +28,24 @@ static int	**free_maps(int **tab, int index)
 
 static int	**init_array(int y, int x)
 {
-	int	**maps;
-	int	i;
+    int	**maps;
+    int	i;
 
-	i = 0;
-	maps = malloc(sizeof(int *) * y);
-	if (!maps)
-		return (NULL);
-	while (i < y)
-	{
-		maps[i] = malloc(sizeof(int) * x);
-		if (!maps[i])
-			return (free_maps(maps, i));
-		i++;
-	}
-	return (maps);
+    i = 0;
+    maps = malloc(sizeof(int *) * y);
+    if (!maps)
+        return (NULL);
+    while (i < y)
+    {
+        maps[i] = malloc(sizeof(int) * x);
+        if (!maps[i])
+        {
+            free_maps(maps, i);
+            return (NULL);
+        }
+        i++;
+    }
+    return (maps);
 }
 
 static void	fill_line(int *tab, char **split, int x)
@@ -96,3 +99,4 @@ int	**init_map(char *str)
 	tab = fill_array(tab, str, x);
 	return (tab);
 }
+
