@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:00:28 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/03 13:51:20 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/03 12:43:06 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	main(int ac, char **av)
+void	print_tab(char *av, int **tab)
 {
-	t_tab	tab;
-	int		k;
+	int	y;
+	int	x;
+	int	i;
+	int	j;
 
-	ac = 5;
-	k = -1;
-	tab.y = count_y(av[1]);
-	tab.x = count_x(av[1]);
-	tab.tab = init_map(av[1]);
-	print_tab(av[1], tab.tab);
-	init_mlx(&tab);
+	i = 0;
+	x = count_x(av);
+	y = count_y(av);
+	while (i < y)
+	{
+		j = 0;
+		while (j < x)
+		{
+			ft_printf("%d ", tab[i][j]);
+			j++;
+		}
+		ft_printf("\n");
+		i++;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:00:26 by emauduit          #+#    #+#             */
-/*   Updated: 2023/12/31 19:41:38 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/03 11:50:59 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,13 @@ int	count_x(char *str)
 	char	*line;
 	char	**value;
 
-
 	fd = open(str, O_RDONLY);
 	line = get_next_line(fd);
 	value = ft_split(line, ' ');
 	x = -1;
 	while (value[++x])
 		free(value[x]);
-	while(line)
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
