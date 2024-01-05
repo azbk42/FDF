@@ -6,15 +6,14 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:00:26 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/03 11:50:59 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/05 12:20:49 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
 
-int	count_x(char *str)
+void	count_y_x(char *str, t_tab *tab)
 {
-	int		x;
 	int		fd;
 	char	*line;
 	char	**value;
@@ -22,34 +21,15 @@ int	count_x(char *str)
 	fd = open(str, O_RDONLY);
 	line = get_next_line(fd);
 	value = ft_split(line, ' ');
-	x = -1;
-	while (value[++x])
-		free(value[x]);
+	tab->x = -1;
+	while (value[++tab->x])
+		free(value[tab->x]);
 	while (line)
 	{
+		tab->y += 1;
 		free(line);
 		line = get_next_line(fd);
 	}
 	free(value);
 	close(fd);
-	return (x);
-}
-
-int	count_y(char *str)
-{
-	int		fd;
-	int		y;
-	char	*line;
-
-	y = 0;
-	fd = open(str, O_RDONLY);
-	line = get_next_line(fd);
-	while (line)
-	{
-		y += 1;
-		free(line);
-		line = get_next_line(fd);
-	}
-	close(fd);
-	return (y);
 }

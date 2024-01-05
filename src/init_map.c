@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/29 17:46:41 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/03 11:50:57 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/05 16:45:53 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,14 +87,10 @@ static int	**fill_array(int **tab, char *str, int x)
 	return (tab);
 }
 
-int	**init_map(char *str)
+int	**init_map(char *str, int x, int y)
 {
 	int	**tab;
-	int	y;
-	int	x;
 
-	x = count_x(str);
-	y = count_y(str);
 	tab = init_array(y, x);
 	tab = fill_array(tab, str, x);
 	return (tab);

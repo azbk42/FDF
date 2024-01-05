@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:41:46 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/03 17:55:26 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/05 18:23:07 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,17 +51,17 @@ void	draw_next_point(t_data *data, t_iso *iso, t_pixel *p, t_tab index)
 {
 	if (!index.flag)
 	{
-		iso->nextiso_x = ((index.j + 1) - index.i) * cos(iso->angle) * LEN_LINE
-			+ p->begin_x;
-		iso->nextiso_y = ((index.j + 1) + index.i) * sin(iso->angle) * LEN_LINE
-			- index.z * iso->height + p->begin_y;
+		iso->nextiso_x = ((index.j + 1) - index.i) * cos(iso->angle)
+			* p->len_line + p->begin_x;
+		iso->nextiso_y = ((index.j + 1) + index.i) * sin(iso->angle)
+			* p->len_line - index.z * data->p->height + p->begin_y;
 	}
 	else
 	{
-		iso->nextiso_x = (index.j - (index.i + 1)) * cos(iso->angle) * LEN_LINE
-			+ p->begin_x;
-		iso->nextiso_y = (index.j + (index.i + 1)) * sin(iso->angle) * LEN_LINE
-			- index.z * iso->height + p->begin_y;
+		iso->nextiso_x = (index.j - (index.i + 1)) * cos(iso->angle)
+			* p->len_line + p->begin_x;
+		iso->nextiso_y = (index.j + (index.i + 1)) * sin(iso->angle)
+			* p->len_line - index.z * data->p->height + p->begin_y;
 	}
 	draw_line(data, iso);
 }
@@ -73,7 +73,7 @@ void	connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab)
 	index.i = tab->i;
 	index.j = tab->j;
 	index.z = tab->tab[index.i][index.j];
-	calculate_iso_coords(iso, p, &index);
+	calculate_iso_coords(iso, p, &index, data);
 	if (index.j < tab->x - 1)
 	{
 		index.z = tab->tab[index.i][index.j + 1];
@@ -90,13 +90,16 @@ void	connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab)
 
 void	draw_project(t_pixel *p, t_iso *iso, t_data *data, t_tab *tab)
 {
-	tab->i = -1;
-	while (++tab->i < tab->y)
+	tab->z = 0;
+	tab->i = 0;
+	while (tab->i < tab->y)
 	{
 		tab->j = -1;
 		while (++tab->j < tab->x)
 		{
 			connect_points(data, iso, p, tab);
 		}
+		tab->i++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
