@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:53 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/05 19:03:33 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:19:02 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,23 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include <math.h>
-// define
 
+// define
 # define HEIGHT 800
 # define WIDTH 1200
 # define MALLOC_ERROR 1
 # define PAGE_UP 0xFF55
 # define PAGE_DOWN 0xFF56
 
+// define color
+
+# ifndef COULEUR
+#  define COULEUR 0
+# endif
+# define YELLOW 0xe0cb10
+# define BLUE 0x381ea6
+# define GREEN 0x1e8810
+# define WHITE 0xffffff
 // struct
 
 typedef struct s_projection
@@ -55,6 +64,8 @@ typedef struct s_tab
 	int		y;
 	int		x;
 	int		z;
+	int		next_z;
+	int		color;
 	long	i;
 	long	j;
 	int		flag;
@@ -89,17 +100,21 @@ typedef struct s_iso
 // initialisation de la map en tableau de INT
 
 int			**free_maps(int **tab, int index);
-void		count_y_x(char *str, t_tab *tab);
+int			count_y_x(char *str, t_tab *tab);
 int			**init_map(char *str, int x, int y);
 
 // check error
 void		error_nb_arg(void);
+void		error_file(void);
 
 // fermer le prog et handle key
 
 int			close_window(t_data *data);
 int			handle_key(int key, t_data *data);
-int			handle_mouse(int button, int x, int y, t_data *data);
+int			handle_esc(int key, t_data *data);
+
+// color
+int			get_color(int start_z, int end_z, int flag);
 
 // calcul
 void		calculate_iso_coords(t_iso *iso, t_pixel *p, t_tab *index,
@@ -108,11 +123,12 @@ void		adjust_starting_points(t_iso *iso, t_pixel *p, t_tab *tab);
 
 // draw
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
-void		draw_line(t_data *data, t_iso *iso);
+void		draw_line(t_data *data, t_iso *iso, int z);
 void		connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab);
 void		draw_next_point(t_data *data, t_iso *iso, t_pixel *p, t_tab index);
 void		draw_project(t_pixel *p, t_iso *iso, t_data *data, t_tab *tab);
 void		print_tab(t_tab *tab);
+void		redraw_map(t_data *data, t_pixel *p, t_tab *tab);
 
 // initialiation de la mlx
 

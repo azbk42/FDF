@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:00:26 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/05 18:54:33 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/06 13:35:02 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,23 @@ void	tab_to_pixel(t_data *data, t_tab *tab, t_pixel *p)
 		return ;
 	iso.angle = M_PI / 6;
 	adjust_starting_points(&iso, p, tab);
+	draw_project(p, &iso, data, tab);
+}
+
+void	redraw_map(t_data *data, t_pixel *p, t_tab *tab)
+{
+	t_iso	iso;
+
+	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
+	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
+	data->path = mlx_get_data_addr(data->img_ptr, &data->bits_pixel,
+			&data->size_line, &data->endian);
+	if (!tab)
+		return ;
+	iso.angle = M_PI / 6;
+	if (p->len_line < 1)
+		p->len_line = 1;
 	draw_project(p, &iso, data, tab);
 }
 

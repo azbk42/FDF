@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 18:41:46 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/05 18:23:07 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/06 18:12:28 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	}
 }
 
-void	draw_line(t_data *data, t_iso *iso)
+void	draw_line(t_data *data, t_iso *iso, int color)
 {
 	double	delta_x;
 	double	delta_y;
@@ -40,7 +40,7 @@ void	draw_line(t_data *data, t_iso *iso)
 	pixel_y = iso->iso_y;
 	while (pixels)
 	{
-		my_mlx_pixel_put(data, pixel_x, pixel_y, 0xFFFFFFFF);
+		my_mlx_pixel_put(data, pixel_x, pixel_y, color);
 		pixel_x += delta_x;
 		pixel_y += delta_y;
 		--pixels;
@@ -54,16 +54,17 @@ void	draw_next_point(t_data *data, t_iso *iso, t_pixel *p, t_tab index)
 		iso->nextiso_x = ((index.j + 1) - index.i) * cos(iso->angle)
 			* p->len_line + p->begin_x;
 		iso->nextiso_y = ((index.j + 1) + index.i) * sin(iso->angle)
-			* p->len_line - index.z * data->p->height + p->begin_y;
+			* p->len_line - index.next_z * data->p->height + p->begin_y;
 	}
 	else
 	{
 		iso->nextiso_x = (index.j - (index.i + 1)) * cos(iso->angle)
 			* p->len_line + p->begin_x;
 		iso->nextiso_y = (index.j + (index.i + 1)) * sin(iso->angle)
-			* p->len_line - index.z * data->p->height + p->begin_y;
+			* p->len_line - index.next_z * data->p->height + p->begin_y;
 	}
-	draw_line(data, iso);
+	index.color = get_color(index.z, index.next_z, COULEUR);
+	draw_line(data, iso, index.color);
 }
 
 void	connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab)
@@ -76,13 +77,13 @@ void	connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab)
 	calculate_iso_coords(iso, p, &index, data);
 	if (index.j < tab->x - 1)
 	{
-		index.z = tab->tab[index.i][index.j + 1];
+		index.next_z = tab->tab[index.i][index.j + 1];
 		index.flag = 0;
 		draw_next_point(data, iso, p, index);
 	}
 	if (index.i < tab->y - 1)
 	{
-		index.z = tab->tab[index.i + 1][index.j];
+		index.next_z = tab->tab[index.i + 1][index.j];
 		index.flag = 1;
 		draw_next_point(data, iso, p, index);
 	}

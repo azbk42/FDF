@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 17:32:56 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/05 19:03:53 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/06 17:16:03 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,7 @@ int	close_window(t_data *data)
 	return (0);
 }
 
-void	redraw_map(t_data *data, t_pixel *p, t_tab *tab)
-{
-	t_iso	iso;
-	
-	mlx_clear_window(data->mlx_ptr, data->win_ptr);
-	mlx_destroy_image(data->mlx_ptr, data->img_ptr);
-	data->img_ptr = mlx_new_image(data->mlx_ptr, WIDTH, HEIGHT);
-	data->path = mlx_get_data_addr(data->img_ptr, &data->bits_pixel,
-			&data->size_line, &data->endian);
-	if (!tab)
-		return ;
-	iso.angle = M_PI / 6;
-	if (p->len_line < 1)
-		p->len_line = 1;
-	printf("iso.height: %f\n", data->p->height);
-	draw_project(p, &iso, data, tab);
-}
-
-
-int	handle_key(int key, t_data *data)
+int	handle_esc(int key, t_data *data)
 {
 	if (key == XK_Escape)
 	{
@@ -54,18 +35,25 @@ int	handle_key(int key, t_data *data)
 		free_maps(data->tab->tab, data->tab->y);
 		exit(0);
 	}
-	else if (key == XK_KP_Add) // '+' key on the numpad
+	return (0);
+}
+
+int	handle_key(int key, t_data *data)
+{
+	if (key == XK_Escape)
+		handle_esc(key, data);
+	if (key == XK_KP_Add)
 		data->p->len_line += 1;
-	else if (key == XK_KP_Subtract) // '-' key
+	else if (key == XK_KP_Subtract)
 		data->p->len_line -= 1;
 	else if (key == XK_Up)
-		data->p->begin_y -= 20;
+		data->p->begin_y -= 30;
 	else if (key == XK_Down)
-		data->p->begin_y += 20;
+		data->p->begin_y += 30;
 	else if (key == XK_Left)
-		data->p->begin_x -= 20;
+		data->p->begin_x -= 30;
 	else if (key == XK_Right)
-		data->p->begin_x += 20;
+		data->p->begin_x += 30;
 	else if (key == PAGE_UP)
 		data->p->height += 0.1;
 	else if (key == PAGE_DOWN)
