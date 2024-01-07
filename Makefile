@@ -29,6 +29,7 @@ bonus: fclean
 
 norminette:
 	norminette $(SRC_DIR)
+	norminette Libft/
 	norminette ./includes/
 
 clean:

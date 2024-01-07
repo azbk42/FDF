@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/31 15:00:28 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/07 13:10:32 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/07 16:07:54 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	main(int ac, char **av)
 	{
 		if (count_y_x(av[1], &tab) < 0)
 		{
-			error_file();
-			return (EXIT_FAILURE);
+			return (error_shape(), EXIT_FAILURE);
 		}
 		tab.tab = init_map(av[1], tab.x, tab.y);
 		init_mlx(&tab);
@@ -32,7 +31,6 @@ int	main(int ac, char **av)
 	{
 		error_nb_arg();
 		return (EXIT_FAILURE);
-	}	
-		
+	}
 	return (EXIT_SUCCESS);
 }

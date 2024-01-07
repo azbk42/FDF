@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:53 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/07 13:22:53 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/07 15:37:07 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int			**init_map(char *str, int x, int y);
 // check error
 void		error_nb_arg(void);
 void		error_file(void);
+void		error_shape(void);
 
 // fermer le prog et handle key
 
