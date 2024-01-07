@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:54:53 by emauduit          #+#    #+#             */
-/*   Updated: 2024/01/06 18:19:02 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/07 13:22:53 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ void		draw_line(t_data *data, t_iso *iso, int z);
 void		connect_points(t_data *data, t_iso *iso, t_pixel *p, t_tab *tab);
 void		draw_next_point(t_data *data, t_iso *iso, t_pixel *p, t_tab index);
 void		draw_project(t_pixel *p, t_iso *iso, t_data *data, t_tab *tab);
-void		print_tab(t_tab *tab);
 void		redraw_map(t_data *data, t_pixel *p, t_tab *tab);
 
 // initialiation de la mlx

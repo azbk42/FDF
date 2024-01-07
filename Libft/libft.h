@@ -6,7 +6,7 @@
 /*   By: emauduit <emauduit@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 11:00:54 by azbreak           #+#    #+#             */
-/*   Updated: 2024/01/02 14:30:16 by emauduit         ###   ########.fr       */
+/*   Updated: 2024/01/07 12:52:47 by emauduit         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 # include "ft_printf/ft_printf.h"
 # include <ctype.h>
 # include <fcntl.h>
+# include <math.h>
+# include <stdbool.h>
 # include <stddef.h>
 # include <stdint.h>
 # include <stdio.h>
-# include <math.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-
 typedef struct s_list
 {
 	void			*content;
